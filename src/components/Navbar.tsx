@@ -75,9 +75,7 @@ export function Navbar() {
       <nav className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 py-4 bg-[var(--jm-nav-bg)] backdrop-blur-xl border-b border-[var(--jm-border-subtle)] transition-all duration-300">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <Link href="/" className="flex items-center gap-3 no-underline text-[var(--jm-text)]">
-            <div className="w-[42px] h-[42px] bg-gradient-to-br from-purple-300 via-purple-500 to-purple-700 rounded-xl flex items-center justify-center font-extrabold text-lg text-white">
-              JM
-            </div>
+            <img src="/logo.png" alt="JobMatches" className="w-[42px] h-[42px] rounded-xl" />
             <span className="font-bold text-xl tracking-tight">
               Job<span className="bg-gradient-to-r from-purple-300 via-purple-500 to-purple-700 bg-clip-text text-transparent">Matches</span>
             </span>

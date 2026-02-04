@@ -11,9 +11,7 @@ export async function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-12">
           <div>
             <Link href="/" className="flex items-center gap-3 no-underline text-[var(--jm-text)] mb-4">
-              <div className="w-[42px] h-[42px] bg-gradient-to-br from-purple-300 via-purple-500 to-purple-700 rounded-xl flex items-center justify-center font-extrabold text-lg text-white">
-                JM
-              </div>
+              <img src="/logo.png" alt="JobMatches" className="w-[42px] h-[42px] rounded-xl" />
               <span className="font-bold text-xl tracking-tight">
                 Job<span className="bg-gradient-to-r from-purple-300 via-purple-500 to-purple-700 bg-clip-text text-transparent">Matches</span>
               </span>
