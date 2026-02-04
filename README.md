@@ -1,36 +1,123 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-16-black?logo=next.js" alt="Next.js 16" />
+  <img src="https://img.shields.io/badge/React-19-61DAFB?logo=react" alt="React 19" />
+  <img src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss" alt="Tailwind CSS 4" />
+  <img src="https://img.shields.io/badge/i18n-EN%20|%20PT%20|%20ES-purple" alt="i18n" />
+</p>
+
+# JobMatches
+
+AI-powered platform that analyzes your resume against job descriptions, shows exactly what to improve, generates an optimized version, and prepares you for interviews with a virtual coaching agent.
+
+## Features
+
+- **Smart Match Score** — Advanced algorithm that calculates real compatibility between your profile and job requirements
+- **Gap Detection** — Identifies missing skills, certifications, keywords, and formatting issues
+- **AI Rewriting** — Rewrites experiences using impact language and metrics aligned with recruiter expectations
+- **ATS Optimization** — Resumes formatted to pass applicant tracking systems used by 99% of large companies
+- **Training Agent** — AI-powered interview simulation with real-time feedback and performance reports
+- **Multiple Formats** — Export in PDF, Word, or plain text
+- **Internationalization** — Full support for English, Portuguese, and Spanish
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | [Next.js 16](https://nextjs.org/) (App Router, Turbopack) |
+| UI | [React 19](https://react.dev/) + [Tailwind CSS 4](https://tailwindcss.com/) |
+| Language | [TypeScript 5](https://www.typescriptlang.org/) |
+| i18n | [next-intl](https://next-intl.dev/) (EN, PT, ES) |
+| Fonts | [Outfit](https://fonts.google.com/specimen/Outfit) + [Space Mono](https://fonts.google.com/specimen/Space+Mono) |
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js >= 18
+- npm >= 9
+
+### Installation
+
+```bash
+git clone https://github.com/hudsonbrendon/jobmatches.me.git
+cd jobmatches.me
+npm install
+```
+
+### Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+### Lint
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run lint
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├── app/
+│   ├── [locale]/
+│   │   ├── layout.tsx        # Root layout (theme, fonts, i18n provider)
+│   │   ├── page.tsx          # Landing page
+│   │   ├── terms/page.tsx    # Terms of Use
+│   │   └── privacy/page.tsx  # Privacy Policy
+│   ├── globals.css           # Global styles & CSS variables
+│   └── favicon.ico
+├── components/
+│   ├── Navbar.tsx            # Navigation bar with language switcher
+│   ├── HeroSection.tsx       # Hero with stats
+│   ├── HeroWizard.tsx        # Interactive 7-step wizard demo
+│   ├── HowItWorks.tsx        # 4-step process section
+│   ├── Features.tsx          # Feature grid
+│   ├── TrainingAgent.tsx     # AI coaching agent showcase
+│   ├── Pricing.tsx           # Credit-based pricing plans
+│   ├── FAQ.tsx               # Accordion FAQ
+│   ├── CTA.tsx               # Call to action
+│   ├── Footer.tsx            # Footer with links
+│   ├── WhatsAppButton.tsx    # Floating WhatsApp button
+│   └── ThemeScript.tsx       # Dark/light theme script
+├── i18n/
+│   ├── routing.ts            # Locale routing config
+│   ├── navigation.ts         # i18n-aware Link, useRouter, etc.
+│   └── request.ts            # Server-side locale resolution
+└── middleware.ts              # Locale redirect middleware
+messages/
+├── en.json                   # English translations
+├── pt.json                   # Portuguese translations
+└── es.json                   # Spanish translations
+```
 
-## Deploy on Vercel
+## Internationalization
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The app supports three locales with URL prefix routing:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Locale | URL | Example |
+|---|---|---|
+| English | `/en/*` | `/en/terms` |
+| Portuguese | `/pt/*` | `/pt/privacy` |
+| Spanish | `/es/*` | `/es/terms` |
+
+Translation files are located in `messages/`. Each component uses `getTranslations()` (server) or `useTranslations()` (client) from `next-intl`.
+
+## License
+
+All rights reserved.
+
+---
+
+Developed by [99lab.dev](https://99lab.dev/)
