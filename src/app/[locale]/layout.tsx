@@ -3,6 +3,7 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { ThemeScript } from "@/components/ThemeScript";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import "../globals.css";
 
 export function generateStaticParams() {
@@ -49,6 +50,7 @@ export default async function RootLayout({
         />
       </head>
       <body className="font-[family-name:var(--font-outfit)] bg-[var(--jm-bg)] text-[var(--jm-text)] min-h-screen">
+        <GoogleAnalytics />
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
     </html>

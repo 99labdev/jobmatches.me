@@ -28,6 +28,7 @@ AI-powered platform that analyzes your resume against job descriptions, shows ex
 | UI | [React 19](https://react.dev/) + [Tailwind CSS 4](https://tailwindcss.com/) |
 | Language | [TypeScript 5](https://www.typescriptlang.org/) |
 | i18n | [next-intl](https://next-intl.dev/) (EN, PT, ES) |
+| Analytics | [Google Analytics 4](https://analytics.google.com/) |
 | Fonts | [Outfit](https://fonts.google.com/specimen/Outfit) + [Space Mono](https://fonts.google.com/specimen/Space+Mono) |
 
 ## Getting Started
@@ -90,7 +91,8 @@ src/
 │   ├── CTA.tsx               # Call to action
 │   ├── Footer.tsx            # Footer with links
 │   ├── WhatsAppButton.tsx    # Floating WhatsApp button
-│   └── ThemeScript.tsx       # Dark/light theme script
+│   ├── ThemeScript.tsx       # Dark/light theme script
+│   └── GoogleAnalytics.tsx   # GA4 script (conditional on env var)
 ├── i18n/
 │   ├── routing.ts            # Locale routing config
 │   ├── navigation.ts         # i18n-aware Link, useRouter, etc.
@@ -113,6 +115,14 @@ The app supports three locales with URL prefix routing:
 | Spanish | `/es/*` | `/es/terms` |
 
 Translation files are located in `messages/`. Each component uses `getTranslations()` (server) or `useTranslations()` (client) from `next-intl`.
+
+## Environment Variables
+
+| Variable | Description | Required |
+|---|---|---|
+| `NEXT_PUBLIC_GA_ID` | Google Analytics 4 measurement ID (e.g. `G-XXXXXXXXXX`) | No |
+
+On Vercel, add it in **Settings > Environment Variables**.
 
 ## License
 
