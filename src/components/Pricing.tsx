@@ -6,6 +6,12 @@ const CheckIcon = () => (
   </svg>
 );
 
+const DiscountIcon = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+  </svg>
+);
+
 export async function Pricing() {
   const t = await getTranslations("Pricing");
 
@@ -16,25 +22,35 @@ export async function Pricing() {
 
   const plans = [
     {
+      id: "plan_1",
       subtitle: t("plan1Subtitle"),
-      price: "R$4.90",
+      price: "R$9.90",
       credits: "1",
-      perCredit: null,
+      perCredit: t("perCredit1"),
+      discount: null,
       popular: false,
+      borderStyle: "border-jm-border-subtle",
     },
     {
+      id: "plan_10",
       subtitle: t("plan2Subtitle"),
-      price: "R$19.90",
+      price: "R$39.90",
       credits: "10",
       perCredit: t("perCredit2"),
-      popular: true,
+      discount: t("discount2"),
+      popular: false,
+      borderStyle: "border-jm-accent border-2",
+      selected: true,
     },
     {
+      id: "plan_50",
       subtitle: t("plan3Subtitle"),
-      price: "R$49.90",
+      price: "R$59.90",
       credits: "50",
       perCredit: t("perCredit3"),
-      popular: false,
+      discount: t("discount3"),
+      popular: true,
+      borderStyle: "border-jm-border-subtle",
     },
   ];
 
@@ -53,12 +69,13 @@ export async function Pricing() {
             {t("creditExplanation")}
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-10">
           {plans.map((plan, i) => (
             <div
               key={i}
-              className={`bg-[var(--jm-card)] border rounded-3xl p-10 relative transition-all duration-300 hover:-translate-y-1 jm-card-shadow ${
-                plan.popular ? "border-jm-accent md:scale-105" : "border-[var(--jm-border-subtle)]"
+              data-plan={plan.id}
+              className={`bg-jm-card border rounded-3xl p-10 relative transition-all duration-300 hover:-translate-y-1 cursor-pointer jm-card-shadow ${plan.borderStyle} ${
+                plan.popular ? "md:scale-105" : ""
               }`}
             >
               {plan.popular && (
@@ -66,38 +83,62 @@ export async function Pricing() {
                   {t("mostPopular")}
                 </span>
               )}
-              <p className="text-[var(--jm-text-secondary)] text-sm mb-6">{plan.subtitle}</p>
-              <div className="mb-6">
-                <span className="font-[family-name:var(--font-space-mono)] text-4xl font-bold">{plan.price}</span>
-              </div>
-              <div className="flex items-center gap-2 px-4 py-3 bg-purple-500/10 rounded-xl mb-6 text-sm">
-                <strong className="text-jm-accent font-[family-name:var(--font-space-mono)]">{plan.credits}</strong>
-                {plan.credits === "1" ? t("credit") : t("credits")}
-              </div>
-              {plan.perCredit && (
-                <p className="text-xs text-[var(--jm-text-secondary)] mb-6">{plan.perCredit}</p>
+
+              {plan.discount && (
+                <div className="mb-4">
+                  <span className="inline-flex items-center gap-1 bg-green-500/10 text-green-600 dark:text-green-400 px-3 py-1.5 rounded-full text-xs font-bold">
+                    <DiscountIcon />
+                    {plan.discount}
+                  </span>
+                </div>
               )}
+
+              <p className="text-jm-text-secondary text-sm mb-6">{plan.subtitle}</p>
+
+              <div className="mb-6">
+                <span className="font-mono text-4xl font-bold text-jm-text">{plan.price}</span>
+              </div>
+
+              <div className="flex items-center gap-2 px-4 py-3 bg-purple-500/10 rounded-xl mb-6 text-sm">
+                <strong className="text-jm-accent font-mono">{plan.credits}</strong>
+                <span className="text-jm-text-secondary">
+                  {plan.credits === "1" ? t("credit") : t("credits")}
+                </span>
+              </div>
+
+              <p className="text-xs text-jm-text-secondary mb-6">{plan.perCredit}</p>
+
               <div className="mb-6 mt-2">
-                <h4 className="font-semibold text-[var(--jm-text)] text-sm mb-3">{t("whatsIncluded")}</h4>
+                <h4 className="font-semibold text-jm-text text-sm mb-3">{t("whatsIncluded")}</h4>
                 <ul className="space-y-2">
                   {benefits.map((b, j) => (
-                    <li key={j} className="flex items-center gap-2 text-xs text-[var(--jm-text-secondary)]">
+                    <li key={j} className="flex items-center gap-2 text-xs text-jm-text-secondary">
                       <CheckIcon />
                       {b}
                     </li>
                   ))}
                 </ul>
               </div>
-              <a
-                href="/accounts/signup/"
-                className={`block w-full text-center px-6 py-3 rounded-xl font-semibold text-sm transition-all ${
+
+              <button
+                type="button"
+                className={`buy-btn block w-full text-center px-6 py-3 rounded-xl font-semibold text-sm transition-all ${
                   plan.popular
                     ? "bg-gradient-to-br from-purple-300 via-purple-500 to-purple-700 text-white shadow-[0_4px_20px_rgba(168,85,247,0.35)] hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(168,85,247,0.35)]"
-                    : "bg-[var(--jm-bg-secondary)] text-[var(--jm-text)] border border-[var(--jm-border-subtle)] hover:border-jm-accent hover:bg-purple-500/10"
+                    : "bg-jm-bg-secondary text-jm-text border border-jm-border-subtle hover:border-jm-accent hover:bg-purple-500/10"
                 }`}
               >
                 {t("getStarted")}
-              </a>
+              </button>
+
+              {/* Select indicator */}
+              <div className={`plan-check absolute top-4 right-4 w-6 h-6 rounded-full bg-jm-accent flex items-center justify-center ${
+                plan.selected ? "" : "hidden"
+              }`}>
+                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
             </div>
           ))}
         </div>

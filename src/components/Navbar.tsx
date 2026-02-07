@@ -134,10 +134,10 @@ export function Navbar() {
               {isDark ? <span>☀</span> : <span>☾</span>}
             </button>
 
-            <a href="/accounts/login/" className="text-[var(--jm-text-secondary)] hover:text-[var(--jm-text)] transition-colors text-sm font-medium hidden md:inline-block">
+            <a href="https://app.jobmatches.me/accounts/login/" className="text-[var(--jm-text-secondary)] hover:text-[var(--jm-text)] transition-colors text-sm font-medium hidden md:inline-block">
               {t("signIn")}
             </a>
-            <a href="/accounts/signup/" className="px-5 py-2.5 rounded-xl font-semibold text-sm bg-gradient-to-br from-purple-300 via-purple-500 to-purple-700 text-white shadow-[0_4px_20px_rgba(168,85,247,0.35)] hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(168,85,247,0.35)] transition-all hidden md:inline-block">
+            <a href="https://app.jobmatches.me/accounts/signup/" className="px-5 py-2.5 rounded-xl font-semibold text-sm bg-gradient-to-br from-purple-300 via-purple-500 to-purple-700 text-white shadow-[0_4px_20px_rgba(168,85,247,0.35)] hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(168,85,247,0.35)] transition-all hidden md:inline-block">
               {t("startFree")}
             </a>
 
@@ -189,13 +189,13 @@ export function Navbar() {
             ))}
           </ul>
           <div className="mt-6 pt-6 border-t border-[var(--jm-border-subtle)] flex flex-col gap-3">
-            <a href="/accounts/login/" className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-[var(--jm-text-secondary)] hover:text-[var(--jm-text)] hover:bg-purple-500/10 border border-[var(--jm-border-subtle)] transition-all">
+            <a href="https://app.jobmatches.me/accounts/login/" className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-[var(--jm-text-secondary)] hover:text-[var(--jm-text)] hover:bg-purple-500/10 border border-[var(--jm-border-subtle)] transition-all">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
               </svg>
               {t("signIn")}
             </a>
-            <a href="/accounts/signup/" className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold bg-gradient-to-br from-purple-300 via-purple-500 to-purple-700 text-white shadow-[0_4px_20px_rgba(168,85,247,0.35)] transition-all">
+            <a href="https://app.jobmatches.me/accounts/signup/" className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold bg-gradient-to-br from-purple-300 via-purple-500 to-purple-700 text-white shadow-[0_4px_20px_rgba(168,85,247,0.35)] transition-all">
               {t("signUp")}
             </a>
           </div>

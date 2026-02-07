@@ -14,7 +14,7 @@ export async function CTA() {
           {t("subtitle")}
         </p>
         <div className="flex justify-center gap-4 flex-wrap">
-          <a href="/accounts/signup/" className="px-8 py-4 rounded-2xl font-semibold text-lg bg-gradient-to-br from-purple-300 via-purple-500 to-purple-700 text-white shadow-[0_4px_20px_rgba(168,85,247,0.35)] hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(168,85,247,0.35)] transition-all">
+          <a href="https://app.jobmatches.me/accounts/signup/" className="px-8 py-4 rounded-2xl font-semibold text-lg bg-gradient-to-br from-purple-300 via-purple-500 to-purple-700 text-white shadow-[0_4px_20px_rgba(168,85,247,0.35)] hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(168,85,247,0.35)] transition-all">
             {t("analyzeResume")}
           </a>
           <a href="#how-it-works" className="px-8 py-4 rounded-2xl font-semibold text-lg bg-[var(--jm-card)] text-[var(--jm-text)] border border-[var(--jm-border-subtle)] hover:border-jm-accent hover:bg-purple-500/10 transition-all">

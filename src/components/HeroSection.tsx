@@ -71,7 +71,7 @@ export function HeroSection() {
           </p>
           <div className="flex gap-4 mb-12 lg:justify-start justify-center flex-wrap">
             <a
-              href="/accounts/signup/"
+              href="https://app.jobmatches.me/accounts/signup/"
               className="px-8 py-4 rounded-2xl font-semibold text-lg bg-gradient-to-br from-purple-300 via-purple-500 to-purple-700 text-white shadow-[0_4px_20px_rgba(168,85,247,0.35)] hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(168,85,247,0.35)] transition-all inline-flex items-center gap-2"
             >
               {t("analyzeResume")}
