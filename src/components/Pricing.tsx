@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { getPricingLocale } from "@/utils/currency";
 
 const CheckIcon = () => (
   <svg className="w-4 h-4 text-purple-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -15,6 +16,10 @@ const DiscountIcon = () => (
 export async function Pricing() {
   const t = await getTranslations("Pricing");
 
+  // Get pricing locale based on user's country (pt for Brazil/BRL, en for others/USD)
+  const pricingLocale = await getPricingLocale();
+  const tPricing = await getTranslations({ locale: pricingLocale, namespace: "Pricing" });
+
   const benefits = [
     t("benefit1"), t("benefit2"), t("benefit3"), t("benefit4"), t("benefit5"),
     t("benefit6"), t("benefit7"), t("benefit8"), t("benefit9"), t("benefit10"),
@@ -23,32 +28,32 @@ export async function Pricing() {
   const plans = [
     {
       id: "plan_1",
-      subtitle: t("plan1Subtitle"),
-      price: "R$9.90",
+      subtitle: tPricing("plan1Subtitle"),
+      price: tPricing("price1"),
       credits: "1",
-      perCredit: t("perCredit1"),
+      perCredit: tPricing("perCredit1"),
       discount: null,
       popular: false,
       borderStyle: "border-jm-border-subtle",
     },
     {
       id: "plan_10",
-      subtitle: t("plan2Subtitle"),
-      price: "R$39.90",
+      subtitle: tPricing("plan2Subtitle"),
+      price: tPricing("price2"),
       credits: "10",
-      perCredit: t("perCredit2"),
-      discount: t("discount2"),
+      perCredit: tPricing("perCredit2"),
+      discount: tPricing("discount2"),
       popular: false,
       borderStyle: "border-jm-accent border-2",
       selected: true,
     },
     {
       id: "plan_50",
-      subtitle: t("plan3Subtitle"),
-      price: "R$59.90",
+      subtitle: tPricing("plan3Subtitle"),
+      price: tPricing("price3"),
       credits: "50",
-      perCredit: t("perCredit3"),
-      discount: t("discount3"),
+      perCredit: tPricing("perCredit3"),
+      discount: tPricing("discount3"),
       popular: true,
       borderStyle: "border-jm-border-subtle",
     },
