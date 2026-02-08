@@ -231,6 +231,27 @@ html {
   border-radius: 0 1px 1px 0;
 }
 
+.iphone-battery-icon-sm {
+  width: 18px;
+  height: 9px;
+  border: 1.5px solid currentColor;
+  border-radius: 2px;
+  padding: 1px;
+  position: relative;
+}
+
+.iphone-battery-icon-sm::after {
+  content: "";
+  position: absolute;
+  right: -3px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.5px;
+  height: 4px;
+  background: currentColor;
+  border-radius: 0 1px 1px 0;
+}
+
 .iphone-battery-level {
   width: 100%;
   height: 100%;
@@ -270,6 +291,11 @@ html {
   .iphone-mockup {
     width: 240px;
     height: 500px;
+  }
+  .iphone-dynamic-island {
+    width: 50px;
+    height: 20px;
+    top: 9px;
   }
 }
 
