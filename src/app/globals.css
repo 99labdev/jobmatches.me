@@ -147,6 +147,7 @@ html {
 .hero-card-hidden {
   opacity: 0;
   transform: translateY(40px) scale(0.95);
+  perspective: 1000px;
 }
 
 .hero-card-visible {
@@ -154,6 +155,122 @@ html {
   transform: translateY(0) scale(1);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  perspective: 1000px;
+}
+
+/* ============================================
+   iPhone Mockup
+   ============================================ */
+@keyframes floatPhone {
+  0%, 100% { transform: translateY(0px) rotateY(-3deg); }
+  50% { transform: translateY(-15px) rotateY(3deg); }
+}
+
+.iphone-mockup {
+  position: relative;
+  width: 300px;
+  height: 620px;
+  animation: floatPhone 6s ease-in-out infinite;
+  margin: 0 auto;
+}
+
+.iphone-frame {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #2a2a3e 0%, #1a1a2e 50%, #0f0f1a 100%);
+  border-radius: 55px;
+  padding: 12px;
+  box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.5),
+              0 30px 60px -30px rgba(0, 0, 0, 0.4),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1),
+              inset 0 -1px 0 rgba(0, 0, 0, 0.3),
+              0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.iphone-screen {
+  width: 100%;
+  height: 100%;
+  background: var(--jm-card);
+  border-radius: 45px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.iphone-dynamic-island {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 72px;
+  height: 25px;
+  background: #000;
+  border-radius: 20px;
+  z-index: 10;
+}
+
+.iphone-battery-icon {
+  width: 25px;
+  height: 12px;
+  border: 1.5px solid currentColor;
+  border-radius: 3px;
+  padding: 1.5px;
+  position: relative;
+}
+
+.iphone-battery-icon::after {
+  content: "";
+  position: absolute;
+  right: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 5px;
+  background: currentColor;
+  border-radius: 0 1px 1px 0;
+}
+
+.iphone-battery-level {
+  width: 100%;
+  height: 100%;
+  background: #4ade80;
+  border-radius: 1px;
+}
+
+.iphone-home-indicator {
+  width: 135px;
+  height: 5px;
+  background: var(--jm-text-secondary);
+  border-radius: 3px;
+  margin: 8px auto 10px;
+  opacity: 0.3;
+}
+
+@media (max-width: 1024px) {
+  .iphone-mockup {
+    width: 260px;
+    height: 540px;
+  }
+  .iphone-frame {
+    border-radius: 48px;
+    padding: 10px;
+  }
+  .iphone-screen {
+    border-radius: 40px;
+  }
+  .iphone-dynamic-island {
+    width: 65px;
+    height: 22px;
+    top: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .iphone-mockup {
+    width: 240px;
+    height: 500px;
+  }
 }
 
 /* ============================================
