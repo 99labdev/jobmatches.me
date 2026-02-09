@@ -56,6 +56,16 @@ export function HeroWizard() {
     },
   ], [t]);
 
+  const stepIcons = [
+    { icon: "📈", label: "Nível" },
+    { icon: "🎯", label: "Foco" },
+    { icon: "👤", label: "Perfil" },
+    { icon: "💼", label: "Vaga" },
+    { icon: "📊", label: "Análise" },
+    { icon: "📄", label: "Template" },
+    { icon: "✨", label: "Gerar" },
+  ];
+
   const [currentStep, setCurrentStep] = useState(0);
   const [selectedOption, setSelectedOption] = useState(-1);
   const [formTexts, setFormTexts] = useState<string[]>(["", "", "", ""]);
@@ -242,25 +252,72 @@ export function HeroWizard() {
           </div>
 
           {/* Content */}
-          <div className="flex-1 relative overflow-hidden">
-            {/* Progress bar */}
-            <div className="flex items-center gap-1 mx-4 mt-1 mb-0">
-              {[1, 2, 3, 4, 5, 6, 7].map((s) => (
+          <div className="flex-1 relative overflow-hidden flex flex-col">
+            {/* Header com Stepper e Progresso */}
+            <div className="px-3 pt-2 pb-2 border-b border-[var(--jm-border-subtle)]">
+              {/* Step Indicator */}
+              <div className="flex justify-between items-center mb-2">
+                <button className="text-[10px] text-[var(--jm-text-secondary)] flex items-center gap-1">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M15 18l-6-6 6-6" />
+                  </svg>
+                  Sair
+                </button>
+                <span className="text-[10px] font-semibold text-[var(--jm-text-secondary)]">
+                  {currentStep + 1}/7
+                </span>
+              </div>
+
+              {/* Horizontal Stepper */}
+              <div className="flex items-center justify-between gap-0.5 relative">
+                {stepIcons.map((item, idx) => (
+                  <div key={idx} className="flex flex-col items-center gap-0.5 flex-1 relative z-10">
+                    <div
+                      className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] transition-all ${
+                        idx < currentStep
+                          ? "bg-purple-500 text-white"
+                          : idx === currentStep
+                          ? "bg-purple-500 text-white ring-2 ring-purple-300"
+                          : "bg-[var(--jm-bg-secondary)] text-[var(--jm-text-secondary)]"
+                      }`}
+                    >
+                      {idx < currentStep ? (
+                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      ) : (
+                        item.icon
+                      )}
+                    </div>
+                    <span
+                      className={`text-[7px] font-medium ${
+                        idx <= currentStep ? "text-purple-500" : "text-[var(--jm-text-secondary)]"
+                      }`}
+                    >
+                      {item.label}
+                    </span>
+                  </div>
+                ))}
+                {/* Progress Line */}
+                <div className="absolute top-3 left-0 right-0 h-[1px] bg-[var(--jm-border-subtle)] z-0" style={{ marginLeft: '12px', marginRight: '12px' }} />
                 <div
-                  key={s}
-                  className={`h-1 flex-1 rounded-full transition-all duration-500 ${s <= currentStep + 1 ? "bg-gradient-to-r from-purple-500 to-purple-700" : "bg-[var(--jm-bg-secondary)]"}`}
+                  className="absolute top-3 left-0 h-[1px] bg-purple-500 z-0 transition-all duration-500"
+                  style={{
+                    width: `calc(${(currentStep / 6) * 100}% - 12px)`,
+                    marginLeft: '12px'
+                  }}
                 />
-              ))}
+              </div>
             </div>
 
-            {/* Steps */}
-            {steps.map((step, idx) => (
-              <div
-                key={idx}
-                className={`wizard-step absolute inset-0 px-4 pt-7 pb-3 ${currentStep === idx ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"}`}
-              >
-                <div className="mt-1">
-                  <div className="flex items-center gap-1.5 mb-0.5">
+            {/* Steps Content */}
+            <div className="flex-1 relative overflow-hidden">
+              {steps.map((step, idx) => (
+                <div
+                  key={idx}
+                  className={`absolute inset-0 px-4 pt-4 pb-16 overflow-y-auto scrollbar-hide ${currentStep === idx ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"}`}
+                >
+                  <div className="flex items-center gap-1.5 mb-1">
                     <span className="text-base">{step.emoji}</span>
                     <span className="text-[10px] font-semibold text-jm-accent uppercase tracking-wider">{step.label}</span>
                   </div>
@@ -273,11 +330,11 @@ export function HeroWizard() {
                       {step.options!.map((opt, i) => (
                         <div
                           key={i}
-                          className={`wizard-option flex items-center gap-2.5 px-2.5 py-2 rounded-xl border border-[var(--jm-border-subtle)] bg-[var(--jm-bg-secondary)]/50 cursor-pointer text-xs ${selectedOption === i && currentStep === idx ? "wizard-option-selected" : ""}`}
+                          className={`wizard-option flex items-center gap-2.5 px-2.5 py-2 rounded-xl border bg-[var(--jm-bg-secondary)]/50 cursor-pointer text-xs transition-all ${selectedOption === i && currentStep === idx ? "border-purple-500 bg-purple-500/10" : "border-[var(--jm-border-subtle)]"}`}
                         >
                           <span className="text-sm">{opt.emoji}</span>
                           <span className="flex-1 font-medium">{opt.text}</span>
-                          <span className={`w-3.5 h-3.5 rounded-full border-2 transition-all wizard-radio ${selectedOption === i && currentStep === idx ? "border-purple-500 bg-purple-500" : "border-[var(--jm-border-subtle)]"}`}></span>
+                          <span className={`w-3.5 h-3.5 rounded-full border-2 transition-all ${selectedOption === i && currentStep === idx ? "border-purple-500 bg-purple-500" : "border-[var(--jm-border-subtle)]"}`}></span>
                         </div>
                       ))}
                     </div>
@@ -289,7 +346,7 @@ export function HeroWizard() {
                       {step.options!.map((opt, i) => (
                         <div
                           key={i}
-                          className={`wizard-option flex flex-col items-center gap-1 px-2 py-2.5 rounded-xl border border-[var(--jm-border-subtle)] bg-[var(--jm-bg-secondary)]/50 cursor-pointer text-center ${selectedOption === i && currentStep === idx ? "wizard-option-selected" : ""}`}
+                          className={`wizard-option flex flex-col items-center gap-1 px-2 py-2.5 rounded-xl border bg-[var(--jm-bg-secondary)]/50 cursor-pointer text-center transition-all ${selectedOption === i && currentStep === idx ? "border-purple-500 bg-purple-500/10" : "border-[var(--jm-border-subtle)]"}`}
                         >
                           <span className="text-lg">{opt.emoji}</span>
                           <span className="text-[10px] font-semibold">{opt.text}</span>
@@ -365,7 +422,7 @@ export function HeroWizard() {
                   {/* Templates */}
                   {step.type === "templates" && (
                     <div className="grid grid-cols-2 gap-2">
-                      <div className={`wizard-option rounded-xl border-2 border-[var(--jm-border-subtle)] p-1.5 cursor-pointer transition-all ${selectedOption === 0 && currentStep === idx ? "wizard-option-selected" : ""}`}>
+                      <div className={`wizard-option rounded-xl border-2 p-1.5 cursor-pointer transition-all ${selectedOption === 0 && currentStep === idx ? "border-purple-500 bg-purple-500/10" : "border-[var(--jm-border-subtle)]"}`}>
                         <div className="bg-[var(--jm-bg-secondary)] rounded-lg p-1.5 mb-1.5 aspect-[3/4] flex">
                           <div className="w-1/3 bg-purple-500/20 rounded-l-md"></div>
                           <div className="w-2/3 p-1 flex flex-col gap-0.5">
@@ -378,7 +435,7 @@ export function HeroWizard() {
                         </div>
                         <p className="text-[10px] font-semibold text-center">{t("templateModern")}</p>
                       </div>
-                      <div className={`wizard-option rounded-xl border-2 border-[var(--jm-border-subtle)] p-1.5 cursor-pointer transition-all ${selectedOption === 1 && currentStep === idx ? "wizard-option-selected" : ""}`}>
+                      <div className={`wizard-option rounded-xl border-2 p-1.5 cursor-pointer transition-all ${selectedOption === 1 && currentStep === idx ? "border-purple-500 bg-purple-500/10" : "border-[var(--jm-border-subtle)]"}`}>
                         <div className="bg-[var(--jm-bg-secondary)] rounded-lg p-1.5 mb-1.5 aspect-[3/4] flex flex-col items-center gap-0.5">
                           <div className="h-1.5 w-1/2 bg-[var(--jm-border-subtle)] rounded-full mt-0.5"></div>
                           <div className="h-1 w-1/3 bg-[var(--jm-border-subtle)] rounded-full"></div>
@@ -424,16 +481,20 @@ export function HeroWizard() {
                     </>
                   )}
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
 
-            {/* Next button */}
-            <div className="absolute bottom-3 right-3 z-20">
-              <div className={`px-3 py-1.5 rounded-xl text-[10px] font-semibold bg-gradient-to-br from-purple-300 via-purple-500 to-purple-700 text-white shadow-[0_4px_15px_rgba(168,85,247,0.3)] transition-all duration-300 flex items-center gap-1 ${showNext ? "opacity-100" : "opacity-0"}`}>
-                {t("next")}
-                <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
+            {/* Footer com Botões */}
+            <div className="absolute bottom-0 left-0 right-0 px-4 py-3 bg-[var(--jm-bg)]/95 backdrop-blur-sm border-t border-[var(--jm-border-subtle)]">
+              <div className="flex items-center gap-2">
+                <button className="px-4 py-1.5 rounded-lg text-[10px] font-semibold text-[var(--jm-text-secondary)] border border-[var(--jm-border-subtle)] transition-all">
+                  Voltar
+                </button>
+                <button
+                  className={`flex-1 px-4 py-1.5 rounded-lg text-[10px] font-semibold text-white bg-gradient-to-r from-purple-500 to-purple-700 shadow-lg transition-all ${showNext ? "opacity-100" : "opacity-50"}`}
+                >
+                  Continuar
+                </button>
               </div>
             </div>
           </div>
