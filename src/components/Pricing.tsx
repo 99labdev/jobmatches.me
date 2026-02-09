@@ -125,8 +125,8 @@ export async function Pricing() {
                 </ul>
               </div>
 
-              <button
-                type="button"
+              <a
+                href="https://app.jobmatches.me/accounts/login/"
                 className={`buy-btn block w-full text-center px-6 py-3 rounded-xl font-semibold text-sm transition-all ${
                   plan.popular
                     ? "bg-gradient-to-br from-purple-300 via-purple-500 to-purple-700 text-white shadow-[0_4px_20px_rgba(168,85,247,0.35)] hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(168,85,247,0.35)]"
@@ -134,7 +134,7 @@ export async function Pricing() {
                 }`}
               >
                 {t("getStarted")}
-              </button>
+              </a>
 
               {/* Select indicator */}
               <div className={`plan-check absolute top-4 right-4 w-6 h-6 rounded-full bg-jm-accent flex items-center justify-center ${
