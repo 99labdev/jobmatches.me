@@ -25,35 +25,39 @@ export async function Pricing() {
     t("benefit6"), t("benefit7"), t("benefit8"), t("benefit9"), t("benefit10"),
   ];
 
+  // Use BRL-specific keys when pricing locale is Brazilian, but in the interface language
+  const isBRL = pricingLocale === "pt";
+  const suffix = isBRL ? "BRL" : "";
+
   const plans = [
     {
       id: "plan_1",
-      subtitle: tPricing("plan1Subtitle"),
+      subtitle: t("plan1Subtitle"),
       price: tPricing("price1"),
       credits: "1",
-      perCredit: tPricing("perCredit1"),
+      perCredit: t(`perCredit1${suffix}` as any),
       discount: null,
       popular: false,
       borderStyle: "border-jm-border-subtle",
     },
     {
       id: "plan_10",
-      subtitle: tPricing("plan2Subtitle"),
+      subtitle: t("plan2Subtitle"),
       price: tPricing("price2"),
       credits: "10",
-      perCredit: tPricing("perCredit2"),
-      discount: tPricing("discount2"),
+      perCredit: t(`perCredit2${suffix}` as any),
+      discount: t(`discount2${suffix}` as any),
       popular: false,
       borderStyle: "border-jm-accent border-2",
       selected: true,
     },
     {
       id: "plan_50",
-      subtitle: tPricing("plan3Subtitle"),
+      subtitle: t(isBRL ? (`plan3Subtitle${suffix}` as any) : "plan3Subtitle"),
       price: tPricing("price3"),
       credits: "50",
-      perCredit: tPricing("perCredit3"),
-      discount: tPricing("discount3"),
+      perCredit: t(`perCredit3${suffix}` as any),
+      discount: t(`discount3${suffix}` as any),
       popular: true,
       borderStyle: "border-jm-border-subtle",
     },
